@@ -8,6 +8,9 @@ import SpeakersList from '../SpeakersList';
 import Microphone from '../icons/Microphone';
 import LoadingSpinner from 'components/LoadingSpinner';
 
+import Twitter from 'components/icons/Twitter';
+import Github from 'components/icons/Github';
+
 import 'stylesheets/meetup';
 
 const VideoBlock = ({ videoUrl, title }) => {
@@ -27,15 +30,45 @@ VideoBlock.propTypes = {
 };
 
 const SpeakerBiosBlock = ({ speakers }) => {
+    let githubLink;
+    const hehe = speakers;
+
+    if (speakers.links) {
+        githubLink = (
+            <a
+                href="https://github.com/wnbrb"
+                aria-label="Github"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <Github className="social-icon" />
+            </a>
+        );
+    }
+
     return (
         <div className="container max-w-2xl my-8 mx-3 p-4 flex flex-col">
             <div className="inline-flex items-center gap-2 align-center mb-5">
                 <Microphone />
+                {hehe}
                 <h4 className="text-xl font-bold text-gray md:text-2xl">About the speakers</h4>
+                <div className="social-links">
+                    <a
+                        href="https://twitter.com/wnb_rb"
+                        aria-label="Twitter"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <Twitter className="social-icon" />
+                    </a>
+                    {githubLink}
+                </div>
             </div>
             <div className="flex flex-wrap items-center gap-5">
-                {speakers?.map(({ id, bio }) => (
-                    <div key={id}>{bio}</div>
+                {speakers?.map(({ id, bio, links }) => (
+                    <div key={id}>
+                        {bio} {links}
+                    </div>
                 ))}
             </div>
         </div>
